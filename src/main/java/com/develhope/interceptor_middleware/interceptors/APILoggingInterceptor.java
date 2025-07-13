@@ -18,12 +18,24 @@ public class APILoggingInterceptor implements HandlerInterceptor {
         }else{
             System.out.println("User-Agent header is missing");
         }
+        long startTime = System.currentTimeMillis();
+        System.out.println("Request URL::" + request.getRequestURL().toString() + ":: Start time=" + System.currentTimeMillis());
+        request.setAttribute("startTime", startTime);
         return true;
     }
 
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView)throws  Exception {
-
+        System.out.println("Request URL::" + request.getRequestURL().toString() + " Sent to handler :: Current Time=");
     }
 
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex)throws  Exception {
+        long startTime = (long) request.getAttribute("startTime");
+        System.out.println("Request URL::" + request.getRequestURL().toString() + ":: End Time=" + System.currentTimeMillis());
+        System.out.println("Request URL::" + request.getRequestURL().toString() + ":: Time Taken=" + (System.currentTimeMillis() - startTime));
 
+        if (ex !=null) {
+            System.out.println("Exception: " + ex.getMessage());
+            ex.getStackTrace();
+        }
+    }
 }

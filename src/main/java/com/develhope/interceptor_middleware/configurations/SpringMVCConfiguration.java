@@ -10,9 +10,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SpringMVCConfiguration implements WebMvcConfigurer {
 
     @Autowired
+    private APILoggingInterceptor apiLoggingInterceptor;
+    @Autowired
     private LegacyInterceptor legacyInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(legacyInterceptor).addPathPatterns("/legacy/**","/legacy*");
+        registry.addInterceptor(apiLoggingInterceptor);
     }
 }

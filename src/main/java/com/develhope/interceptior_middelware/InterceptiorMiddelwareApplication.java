@@ -1,0 +1,13 @@
+package com.develhope.interceptior_middelware;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class InterceptiorMiddelwareApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(InterceptiorMiddelwareApplication.class, args);
+	}
+
+}
